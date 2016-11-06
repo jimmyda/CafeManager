@@ -1,0 +1,48 @@
+/*------------------------
+    menu.txt 
+-------------------------*/
+알파벳 순서로 정렬된 순서로 제공
+음료index는 0부터 vector형식으로 사용할 예정
+아래는 형식 예제
+
+4	<- 총 메뉴의 숫자
+americano 60 2000  <- 이름/제조시간(sec)/가격(원) 
+caffelatte 110 3000
+caffemocca 120 3500
+espresso 60 2000
+
+/*------------------------
+    barista.txt 
+-------------------------*/
+숙련도(0~5) 순서로 정렬된 순서로 제공
+바리스타index는 0부터 vector형식으로 사용할 예정
+아래는 형식 예제
+
+4	<- 총 바리스타의 숫자
+0 3		// <- 숙련도/만들수 있는 음료 갯수
+americano caffelatte caffemocca		// <- 만들수 있는 음료이름
+3 2
+caffelatte caffemocca
+3 4
+americano caffelatte caffemocca espresso
+4 1
+americano
+
+
+/*------------------------
+    order.txt 
+-------------------------*/
+주문번호 순서로 정렬된 데이터가 들어온다
+주문번호와 고객번호가 다른경우는 같은고객이 다른 음료를 주문했을 경우
+주문은 queue 자료 구조로 저장한다.
+아래는 형식 예제
+
+1 1 08:30:00 espresso 1 <- 주문번호/주문고객번호/주문시간/주문음료/주문수량
+2 2 08:31:20 americano 2
+3 2 08:31:20 caffelatte 1
+4 3 08:33:30 caffemocca 4
+5 4 08:34:40 americano 1
+6 5 08:34:50 americano 2
+7 6 08:34:30 americano 1
+8 6 08:35:30 espresso 1
+9 7 09:31:03 espresso 1

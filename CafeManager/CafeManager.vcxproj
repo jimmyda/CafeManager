@@ -146,6 +146,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="loadBalancing.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="barista.h" />
+    <ClInclude Include="menu.h" />
+    <ClInclude Include="order.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="barista.txt" />
+    <Text Include="help.txt" />
+    <Text Include="menu.txt" />
+    <Text Include="order.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
