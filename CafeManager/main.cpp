@@ -92,7 +92,7 @@ int main() {
 	cout << endl;
 
 	for (i = 0; i < numOfBarista; i++)
-		cout << i << "번 바리스타, 숙련도 :" << bari[i].getProficiency() << " 만들수 있는 커피 숫자 :" << bari[i].getNumOfMakeableMenu() << endl;
+		cout << i << "번 바리스타, 숙련도 :" << bari[i].getProficiency() << " 만들수 있는 메뉴 종류 :" << bari[i].getNumOfMakeableMenu() << endl;
 	cout << endl;
 
 	while (!ord.empty()) {
