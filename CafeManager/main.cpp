@@ -3,6 +3,7 @@
 #include <queue>
 #include "barista.h"
 #include "order.h"
+#include "loadBalancing.h"
 
 using namespace std;
 
@@ -17,22 +18,40 @@ queue<order> ord;		// 모든 주문정보를 저장해둘 queue형 자료구조
 
 string drinkName;	// 메뉴 이름
 
+// main 안에 깔끔하게 해서 구분하기 편하게 하기 위해 테스트 함수 따로 뺀거
+void test();
+
 int main() {
 
 	loadMenuFile("menu.txt");
 	loadBaristaFile("barista.txt");
 	loadOrderFile("order.txt");
-	
+	cout << endl;
+
+	// loadBalancing
+	loadBalancing();
+
 	// test
+	test();
+	
+	return 0;
+}
+
+// 이거 UI 클래스라도 만들든지 해서 쉽게 변경 가능하게 할 필요 있음
+void test() {
 	int i;
 
 	for (i = 0; i < men.size(); i++)
 		cout << i << "번 메뉴, 메뉴이름 :" << men[i].getDrinkName() << " 만드는 시간 :" << men[i].getMakeTime() << "초" << endl;
 	cout << endl;
-	
-	for (i = 0; i < bari.size() ; i++)
+
+	for (i = 0; i < bari.size(); i++)
 		cout << i << "번 바리스타, 숙련도 :" << bari[i].getProficiency() << " 만들수 있는 메뉴 종류 :" << bari[i].getNumOfMakeableMenu() << endl;
 	cout << endl;
+
+	for (i = 0; i < bari.size(); i++) {
+		cout << i << "번 바리스타, 주문량 : " << bari[i].getNumOfCofMade() << endl;
+	}
 
 	while (!ord.empty()) {
 		cout << "주문번호 : " << ord.front().getOrderNum() << " 주문시각 : " << ord.front().getOrderTime()
@@ -40,8 +59,6 @@ int main() {
 		ord.pop();
 	}
 	cout << endl;
-	
-	return 1;
 }
 
 /****************************
