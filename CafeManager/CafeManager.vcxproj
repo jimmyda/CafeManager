@@ -146,11 +146,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="loadBalancing.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="barista.h" />
+    <ClInclude Include="loadBalancing.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="order.h" />
   </ItemGroup>
