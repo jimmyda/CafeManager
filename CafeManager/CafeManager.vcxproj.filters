@@ -32,6 +32,9 @@
     <ClInclude Include="barista.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="myTime.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="help.txt">
