@@ -29,10 +29,10 @@
     <ClInclude Include="barista.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="myTime.h">
+    <ClInclude Include="loadBalancing.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="loadBalancing.h">
+    <ClInclude Include="myTime.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
