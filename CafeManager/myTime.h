@@ -1,4 +1,4 @@
-// 시 분 초 처리를 쉽게하기 위한 헤더
+// 시 분 초 처리를 쉽게하기 위한 헤더 (사용법은 main에 test()에 있음)
 #pragma once
 #include <string>
 using namespace std;
@@ -27,8 +27,13 @@ public:
 	int getMin();
 	int getSec();
 
+
+	//mutator
+	void setTime(string time);
+
 	// ostream 연산자 << 오버로딩(출력을 쉽게)
 	friend ostream& operator<<(ostream& out, const myTime& t) {
+		
 		if (t.hour < 10)
 			out << "0" << t.hour;
 		else
@@ -43,12 +48,15 @@ public:
 			out << ":" << t.sec;
 		return out;
 	}
+
+	// myTime type간의 ==(equal) 비교연산자 오버로딩
+	bool operator==(myTime &t);
 };
 
 // accessor
 int myTime::getHour() {
 	if (hour > 23)
-		hour = 0;
+		hour -= 24;
 	return hour; 
 }
 
@@ -70,3 +78,15 @@ int myTime::getSec() {
 	return sec; 
 }
 
+void myTime::setTime(string time) {
+	hour = (time[0] - '0') * 10 + (time[1] - '0');
+	min = (time[3] - '0') * 10 + (time[4] - '0');;
+	sec = (time[6] - '0') * 10 + (time[7] - '0');;
+}
+
+// 연산자 오버로딩
+bool myTime::operator==(myTime &t) {
+	if (hour != t.hour || min != t.min || sec != t.sec)
+		return false;
+	return true;
+}

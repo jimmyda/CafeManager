@@ -3,6 +3,7 @@
 #include <queue>
 #include "barista.h"
 #include "order.h"
+#include "myTime.h"
 #include "loadBalancing.h"
 
 using namespace std;
@@ -38,6 +39,7 @@ int main() {
 }
 
 // 이거 UI 클래스라도 만들든지 해서 쉽게 변경 가능하게 할 필요 있음
+// 박현준 : 나중에 지워야할 부분이라 괜찮아요
 void test() {
 	int i;
 
@@ -46,7 +48,7 @@ void test() {
 	cout << endl;
 
 	for (i = 0; i < bari.size(); i++)
-		cout << i << "번 바리스타, 숙련도 :" << bari[i].getProficiency() << " 만들수 있는 메뉴 종류 :" << bari[i].getNumOfMakeableMenu() << endl;
+		cout << i << "번 바리스타, 숙련도 :" << bari[i].getRank() << endl;
 	cout << endl;
 
 	for (i = 0; i < bari.size(); i++) {
@@ -59,6 +61,19 @@ void test() {
 		ord.pop();
 	}
 	cout << endl;
+
+	// myTime.h 관련 테스트 and 사용법
+	myTime t1 = "08:30:00";
+	myTime t2 = "25:62:80"; // 잘못된 데이터가 들어왔을경우 getSec()을 호출해주면 바른 데이터로 바뀐다(근데 그럴일은 없을듯..)
+	cout << t1 << " " << t2 << endl;
+	cout << t2.getHour() << ":" << t2.getMin() << ":" << t2.getSec() << endl;
+	cout << t1 << " " << t2 << endl;
+	myTime t3 = "08:30:00";
+	if (t1 == t3) // 쉽게 시간이 같은지(주문시간과 진행시간) 비교 가능
+		cout << "같습니다" << endl;
+	cout << endl;
+
+	
 }
 
 /****************************
@@ -69,7 +84,8 @@ void loadMenuFile(string fileName) {
 	int i;
 	int numOfMenu;	// 총 메뉴의 숫자
 	int makeTime, drinkPrice;	// 메뉴를 만드는데 걸리는 시간, 메뉴의 가격
-	
+	int makableRank;	// 이 메뉴를 만드는데 필요한 바리스타 랭크
+
 	cout << fileName << " loading" << endl;
 	ifstream in(fileName);
 	if (in.fail()) {
@@ -79,8 +95,8 @@ void loadMenuFile(string fileName) {
 
 	in >> numOfMenu;
 	for (i = 0; i < numOfMenu; i++) {
-		in >> drinkName >> makeTime >> drinkPrice;
-		menu temp(drinkName, makeTime, drinkPrice);
+		in >> drinkName >> makeTime >> drinkPrice >> makableRank;
+		menu temp(drinkName, makeTime, drinkPrice, makableRank);
 		men.push_back(temp);
 	}
 	cout << fileName << " load complete" << endl;
@@ -94,8 +110,7 @@ void loadBaristaFile(string fileName) {
 
 	int i, j;
 	int numOfBarista;	// 총 바리스타의 숫자
-	int numOfMakableMenu;	// 바리스타가 만들 수 있는 메뉴의 수
-	int proficiency;	// 바리스타의 숙련도 (0 ~ 5)
+	int rank;	// 바리스타의 랭크 (0 ~ 5)
 		
 	cout << fileName << " loading" << endl;
 	ifstream in(fileName);
@@ -106,14 +121,9 @@ void loadBaristaFile(string fileName) {
 
 	in >> numOfBarista;
 	for (i = 0; i < numOfBarista; i++) {
-		in >> proficiency >> numOfMakableMenu;
-		barista temp(proficiency, numOfMakableMenu);
+		in >> rank;
+		barista temp(rank);
 		bari.push_back(temp);
-		for (j = 0; j < numOfMakableMenu; j++) {
-			in >> drinkName;
-			// To do something  
-			// 받은 음료 정보를 barista.h의 vector형 makable에 추가 저장하려고 생각중
-		}
 	}
 	cout << fileName << " load complete" << endl;
 	in.close();
@@ -122,7 +132,6 @@ void loadBaristaFile(string fileName) {
 /*********************************
 주문에 대한 데이터를 큐에 저장한다
 **********************************/
-
 void loadOrderFile(string fileName) {
 
 	int orderNum;		// 주문번호

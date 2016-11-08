@@ -1,5 +1,8 @@
-4
-americano 60 2000
-caffelatte 110 3000
-caffemocca 120 3500
-espresso 60 2000
+7
+americano 60 2000 0 
+bubbletea 80 2500 1 
+caffelatte 110 3000 2
+caffemocca 120 3500 3
+caramelmac 150 4000 5
+espresso 60 2000 4
+icetea 40 2000 1 

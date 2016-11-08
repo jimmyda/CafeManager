@@ -3,30 +3,35 @@
 -------------------------*/
 알파벳 순서로 정렬된 순서로 제공
 음료index는 0부터 vector형식으로 사용할 예정
+음료이름 알파벳순으로 오름차순 정렬되있다.(메뉴 수가 많아질 경우 binary search를 위함)
 아래는 형식 예제
 
-4	<- 총 메뉴의 숫자
-americano 60 2000  <- 이름/제조시간(sec)/가격(원) 
-caffelatte 110 3000
-caffemocca 120 3500
-espresso 60 2000
+7	<- 총 메뉴의 숫자
+americano 60 2000 0 <- 이름/제조시간(sec)/가격(원)/제조가능랭크
+bubbletea 80 2500 1 
+caffelatte 110 3000 2
+caffemocca 120 3500 3
+caramelmac 150 4000 5
+espresso 60 2000 4
+icetea 40 2000 1 
+
 
 /*------------------------
     barista.txt 
 -------------------------*/
-숙련도(0~5) 순서로 정렬된 순서로 제공
+랭크(0~5) 순서로 정렬된 순서로 제공
 바리스타index는 0부터 vector형식으로 사용할 예정
+랭크 순으로 오름차순 정렬되있다.(바리스타 수가 많아질 경우 binary search를 위함)
 아래는 형식 예제
 
-4	<- 총 바리스타의 숫자
-0 3		// <- 숙련도/만들수 있는 음료 갯수
-americano caffelatte caffemocca		// <- 만들수 있는 음료이름
-3 2
-caffelatte caffemocca
-3 4
-americano caffelatte caffemocca espresso
-4 1
-americano
+7	<- 총 바리스타의 숫자
+0	<- 숙련도
+1
+1
+2
+3
+4
+5
 
 
 /*------------------------
