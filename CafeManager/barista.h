@@ -38,12 +38,16 @@ public:
 	// mutator
 	void setProficiency(int prof) { proficiency = prof; }
 	void incNumOfCofMade() { numOfCofMade++; }	// numOfCofMade++
+	void incNumOfCofMade(int numOfCof) { numOfCofMade += numOfCof; }
 
 												// function
+	// 바리스타가 선택되었을 때 
+	// 바리스타 클래스내에서 바꿔주어야할 부분 work로 모아둔거
+	void doWork(string drinkName, int numOfDrink); 
+	int currentWork();
 	void endOfDay();
 	int baristaMakeTime(string drink);	// 숙련도에 따른 바리스타의 음료 제조 시간
 };
-
 
 // 하루가 끝나면 전날까지 만들었던 총 커피수에 오늘만든 커피수를 더해준다
 void barista::endOfDay() {
@@ -83,3 +87,10 @@ void barista::funcName(type param, ..) {
 }
 */
 
+void barista::doWork(string drinkName, int numOfDrink) {
+	this->incNumOfCofMade(numOfDrink);
+}
+
+int barista::currentWork() {
+	return this->getNumOfCofMade();
+}
