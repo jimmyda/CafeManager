@@ -6,13 +6,14 @@ private:
 	int totalMade;		// 바리스타가 만든 총 커피의 수
 	int numOfCofMade;	// 오늘 만든 커피의 수
 	int rank;	// 바리스타의 랭크 (0 ~ 5, 변수명이 어렵고 길어서 바꿈)
-
+	bool doing; // flag(바리스타가 음료를 만드는 중이면 true 아니면 false)
 public:
 	// 생성자
 	barista() {	//  디폴트 생성자
 		totalMade = -1;
 		numOfCofMade = -1;
 		rank = -1;
+		bool doing = false;
 		// to do something
 
 	}
@@ -20,6 +21,7 @@ public:
 		totalMade = 0;
 		numOfCofMade = 0;
 		rank = prof;
+		bool doing = false;
 		// to do something
 
 	}
@@ -28,16 +30,16 @@ public:
 	int getNumOfCofMade() { return numOfCofMade; }
 	int getRank() { return rank; }
 	int getTotalMade() { return totalMade; }
+	bool getDoing() { return doing; }	// 음료를 제조중인지 확인
 
 	// mutator
 	void setRank(int prof) { rank = prof; }
 	void incNumOfCofMade() { numOfCofMade++; }	// numOfCofMade++
 	void incNumOfCofMade(int numOfCof) { numOfCofMade += numOfCof; }
-
-												// function
-	// 바리스타가 선택되었을 때 
-	// 바리스타 클래스내에서 바꿔주어야할 부분 work로 모아둔거
-	void doWork(string drinkName, int numOfDrink); 
+	
+	// function
+	void doWork() { doing = true; }	// 바리스타가 음료제조를 시작
+	void endWork() { doing = false; }	// 바리스타가 음료제조를 완료
 	int currentWork();
 	void endOfDay();
 };
@@ -53,15 +55,6 @@ void barista::funcName(type param, ..) {
 
 }
 */
-
-void barista::doWork(string drinkName, int numOfDrink) {
-	//this->incNumOfCofMade(numOfDrink);
-	/***************************************************
-	   this 사용해주지 않아도 됩니다
-	   헤더 내부에서는 헤더 내부 private 변수에 바로 접근가능합니다
-	***************************************************/
-	numOfCofMade += numOfDrink;
-}
 
 int barista::currentWork() {
 	//return this->getNumOfCofMade();

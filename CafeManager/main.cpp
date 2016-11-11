@@ -30,10 +30,10 @@ int main() {
 	cout << endl;
 
 	// loadBalancing
-	loadBalancing();
+	start();
 
 	// test
-	test();
+	//test();
 	
 	return 0;
 }
@@ -44,7 +44,7 @@ void test() {
 	int i;
 
 	for (i = 0; i < men.size(); i++)
-		cout << i << "번 메뉴, 메뉴이름 :" << men[i].getDrinkName() << " 만드는 시간 :" << men[i].getMakeTime() << "초" << endl;
+		cout << i << "번 메뉴, 메뉴이름 :" << men[i].getDrinkName() << " 만드는 시간 :" << men[i].getMakeTime() << "분" << endl;
 	cout << endl;
 
 	for (i = 0; i < bari.size(); i++)
@@ -71,6 +71,14 @@ void test() {
 	myTime t3 = "08:30:00";
 	if (t1 == t3) // 쉽게 시간이 같은지(주문시간과 진행시간) 비교 가능
 		cout << "같습니다" << endl;
+	
+	for (int i = 0; i < 30; i++) {
+		++t3;
+	}
+	++t3;
+	cout << t1 << " " << t3 << endl;
+	//t1 = t3 + 5;
+	cout << t1 << " " << t3 << endl;
 	cout << endl;
 
 	

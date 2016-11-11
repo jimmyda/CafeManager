@@ -1,9 +1,9 @@
 1 1 08:30:00 espresso 1
-2 2 08:31:20 americano 2
-3 2 08:31:20 caffelatte 1
-4 3 08:33:30 caffemocca 4
-5 4 08:34:40 americano 1
-6 5 08:34:50 americano 2
-7 6 08:34:30 americano 1
-8 6 08:35:30 espresso 1
-9 7 09:31:03 espresso 1
+2 2 08:31:00 americano 2
+3 2 08:31:00 caffelatte 1
+4 3 08:33:00 caffemocca 4
+5 4 08:34:00 americano 1
+6 5 08:35:00 americano 2
+7 6 08:36:00 americano 1
+8 6 08:36:00 espresso 1
+9 7 09:31:00 espresso 1

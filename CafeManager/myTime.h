@@ -51,6 +51,9 @@ public:
 
 	// myTime type간의 ==(equal) 비교연산자 오버로딩
 	bool operator==(myTime &t);
+
+	//myTime& operator+(int num);
+	myTime& operator++();
 };
 
 // accessor
@@ -61,7 +64,7 @@ int myTime::getHour() {
 }
 
 int myTime::getMin() {
-	if (min > 60) {
+	if (min > 59) {
 		hour++;
 		min -= 60;
 	}
@@ -70,7 +73,7 @@ int myTime::getMin() {
 }
 
 int myTime::getSec() {
-	if (sec > 60){
+	if (sec > 59){
 		min++;
 		sec -= 60;
 	}
@@ -89,4 +92,21 @@ bool myTime::operator==(myTime &t) {
 	if (hour != t.hour || min != t.min || sec != t.sec)
 		return false;
 	return true;
+}
+/*
+myTime& myTime::operator+(int num) {
+	myTime temp(hour, min, sec);
+	return temp;
+}
+*/
+myTime& myTime::operator++() {
+	min++;
+	if (min > 59) {
+		hour++;
+		min -= 60;
+	}
+	if (hour > 23)
+		hour -= 24;
+
+	return *this;
 }

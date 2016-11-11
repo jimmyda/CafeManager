@@ -7,13 +7,13 @@
 아래는 형식 예제
 
 7	<- 총 메뉴의 숫자
-americano 60 2000 0 <- 이름/제조시간(sec)/가격(원)/제조가능랭크
-bubbletea 80 2500 1 
-caffelatte 110 3000 2
-caffemocca 120 3500 3
-caramelmac 150 4000 5
-espresso 60 2000 4
-icetea 40 2000 1 
+americano 1 2000 0 <- 이름/제조시간(min)/가격(원)/제조가능랭크
+bubbletea 2 2500 1 
+caffelatte 2 3000 2
+caffemocca 2 3500 3
+caramelmac 3 4000 5
+espresso 1 2000 4
+icetea 1 2000 1 
 
 
 /*------------------------
@@ -40,17 +40,22 @@ icetea 40 2000 1
 주문번호 순서로 정렬된 데이터가 들어온다
 주문번호와 고객번호가 다른경우는 같은고객이 다른 음료를 주문했을 경우
 주문은 queue 자료 구조로 저장한다.
+
+복잡도를 줄이기위해 주문은 분단위로 들어온다
+입력데이터는 같은 시간에 다른 고객이 주문하는 경우는 없다
+같은시간에 다른 주문이 들어오면 한고객이 여러가지 종류의 음료를 주문한 것이다(주문고객번호가 같음)
+
 아래는 형식 예제
 
 1 1 08:30:00 espresso 1 <- 주문번호/주문고객번호/주문시간/주문음료/주문수량
-2 2 08:31:20 americano 2
-3 2 08:31:20 caffelatte 1
-4 3 08:33:30 caffemocca 4
-5 4 08:34:40 americano 1
-6 5 08:34:50 americano 2
-7 6 08:34:30 americano 1
-8 6 08:35:30 espresso 1
-9 7 09:31:03 espresso 1
+2 2 08:31:00 americano 2
+3 2 08:31:00 caffelatte 1
+4 3 08:33:00 caffemocca 4
+5 4 08:34:00 americano 1
+6 5 08:34:00 americano 2
+7 6 08:35:00 americano 1
+8 6 08:35:00 espresso 1
+9 7 09:31:00 espresso 1
 
 // 김태훈 잘 읽고 이해했습니다. 
 // 의문사항 : 숙련도에 따라 음료 만드는 시간 어떻게 할 것인지 고민해봐야겠습니다.
