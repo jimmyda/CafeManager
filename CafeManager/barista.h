@@ -1,5 +1,4 @@
 #pragma once
-#include "menu.h"
 
 class barista {
 private:
@@ -7,6 +6,7 @@ private:
 	int numOfCofMade;	// 오늘 만든 커피의 수
 	int rank;	// 바리스타의 랭크 (0 ~ 5, 변수명이 어렵고 길어서 바꿈)
 	bool doing; // flag(바리스타가 음료를 만드는 중이면 true 아니면 false)
+
 public:
 	// 생성자
 	barista() {	//  디폴트 생성자
@@ -15,7 +15,6 @@ public:
 		rank = -1;
 		bool doing = false;
 		// to do something
-
 	}
 	barista(int prof) {
 		totalMade = 0;
@@ -36,7 +35,7 @@ public:
 	void setRank(int prof) { rank = prof; }
 	void incNumOfCofMade() { numOfCofMade++; }	// numOfCofMade++
 	void incNumOfCofMade(int numOfCof) { numOfCofMade += numOfCof; }
-	
+
 	// function
 	void doWork() { doing = true; }	// 바리스타가 음료제조를 시작
 	void endWork() { doing = false; }	// 바리스타가 음료제조를 완료

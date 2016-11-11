@@ -19,19 +19,40 @@ CafeManager에 적용 시켜 보면
 extern vector<menu> men;
 extern vector<barista> bari;
 extern queue<order> ord;
+//vector<int, int> workIndex;
 
 #define MAX_ORDER 10 // 바리스타 개인이 받을 수 있는 최대 주문량
-
+/*
+int searchMakeTime(string drinkName, int begin, int end) {
+	int mid = (begin + end) / 2;
+	if (drinkName == men[mid].getDrinkName()) {
+		cout << "찾은 음료 이름 :" << drinkName << endl;
+		return men[mid].getMakeTime();
+	}
+	else if (begin <= end){
+		if (drinkName[0] == men[mid].getDrinkName()[0])
+			
+		else if (drinkName[0] < men[mid].getDrinkName()[0])
+			searchMakeTime(drinkName, begin, mid);
+		else
+			searchMakeTime(drinkName, mid, end);
+	}
+}
+*/
 void selectBarista(order ord) {
 	
 	int numOfDrink = ord.getNumOfDrink();	// 주문 받은 수량
 	int numOfBarista = bari.size();		// 총 바리스타의 수
+	string drinkName = ord.getDrinkName();
+	
+//	int makeTime = searchMakeTime(drinkName, 0, men.size());
 
-	if (numOfDrink == 1) { // 주문 받은 수량이 1개이면
+	if (numOfDrink == 1) { // 주문 받은 1개이면
 	// 오름차순으로 정렬되있으므로 숙련도가 높은 barista부터 찾음(뒤부터 search)
 		for (int i = numOfBarista - 1; i >= 0; i--) {	// 바리스타 index는 0부터 이므로 numOfBarista-1
 			if (!bari[i].getDoing()) {	// 일을 안하고 있으면
 				bari[i].doWork();	// barista의 flag를 true로 바꿔줌
+				//workIndex.push_back();
 				break;
 			}
 		}

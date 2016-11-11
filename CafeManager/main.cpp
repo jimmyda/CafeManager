@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <queue>
+#include "menu.h"
 #include "barista.h"
 #include "order.h"
 #include "myTime.h"
@@ -77,7 +78,7 @@ void test() {
 	}
 	++t3;
 	cout << t1 << " " << t3 << endl;
-	//t1 = t3 + 5;
+	t1 = t3 + 5;
 	cout << t1 << " " << t3 << endl;
 	cout << endl;
 

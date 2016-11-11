@@ -22,6 +22,13 @@ public:
 		sec = (time[6] - '0') * 10 + (time[7] - '0');;
 	}
 
+	// hh:mm:ss 형식으로 받은 string을 int형 시, 분, 초로 분리해 생성해준다
+	myTime(int h, int m, int s) {
+		hour = h;
+		min = m;
+		sec = s;
+	}
+
 	// accessor
 	int getHour();
 	int getMin();
@@ -33,7 +40,6 @@ public:
 
 	// ostream 연산자 << 오버로딩(출력을 쉽게)
 	friend ostream& operator<<(ostream& out, const myTime& t) {
-		
 		if (t.hour < 10)
 			out << "0" << t.hour;
 		else
@@ -52,7 +58,7 @@ public:
 	// myTime type간의 ==(equal) 비교연산자 오버로딩
 	bool operator==(myTime &t);
 
-	//myTime& operator+(int num);
+	myTime operator+(int num);
 	myTime& operator++();
 };
 
@@ -93,12 +99,19 @@ bool myTime::operator==(myTime &t) {
 		return false;
 	return true;
 }
-/*
-myTime& myTime::operator+(int num) {
+
+myTime myTime::operator+(int num) {
 	myTime temp(hour, min, sec);
+	temp.min += num;
+	if (temp.min > 59) {
+		temp.hour++;
+		temp.min -= 60;
+	}
+	if (temp.hour > 23)
+		temp.hour -= 24;
 	return temp;
 }
-*/
+
 myTime& myTime::operator++() {
 	min++;
 	if (min > 59) {
