@@ -76,7 +76,7 @@ void findEndOrder() {
 
 void start() {
 	int totalMake = 0;	// 모든 바리스타 만든 총 음료수
-	myTime curTime = "08:30:00";	// 진행 현재 시각(시간에 흐름에 따라 진행)
+	myTime curTime;// = "08:30:00";	// 진행 현재 시각(시간에 흐름에 따라 진행)
 
 	// 큐에 잇는 주문이 다 빌 때까지
 	while (!ord.empty()) {

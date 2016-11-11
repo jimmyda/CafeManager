@@ -6,6 +6,7 @@
 #include "order.h"
 #include "myTime.h"
 #include "loadBalancing.h"
+#include "extendedLoadBalancing.h"
 
 using namespace std;
 
@@ -31,7 +32,11 @@ int main() {
 	cout << endl;
 
 	// loadBalancing
-	start();
+	//start();
+	LoadBalancing loadbalncing; // virtual class 로 짜려햇는데 잘안됨
+	cout << endl;
+	LoadBalancing loadbalncing2(new ReaderSample);
+	//LoadBalancing loadbalncing3(new WriterSample); // 이런식으로 해도 되는 포인트 처리해줘야하지만
 
 	// test
 	//test();
@@ -64,7 +69,7 @@ void test() {
 	cout << endl;
 
 	// myTime.h 관련 테스트 and 사용법
-	myTime t1 = "08:30:00";
+	/*myTime t1 = "08:30:00";
 	myTime t2 = "25:62:80"; // 잘못된 데이터가 들어왔을경우 getSec()을 호출해주면 바른 데이터로 바뀐다(근데 그럴일은 없을듯..)
 	cout << t1 << " " << t2 << endl;
 	cout << t2.getHour() << ":" << t2.getMin() << ":" << t2.getSec() << endl;
@@ -82,7 +87,7 @@ void test() {
 	cout << t1 << " " << t3 << endl;
 	cout << endl;
 
-	
+	*/
 }
 
 /****************************

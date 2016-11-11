@@ -150,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="barista.h" />
+    <ClInclude Include="extendedLoadBalancing.h" />
     <ClInclude Include="loadBalancing.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="myTime.h" />
