@@ -4,7 +4,8 @@ using namespace std;
 
 class Reader {
 public:
-	virtual void read() { cout << "read something" << endl;
+	virtual void read() {
+		cout << "read something" << endl;
 		readData();
 		readCondition();
 	}
@@ -15,7 +16,8 @@ protected:
 
 class Writer {
 public:
-	void write() { cout << "write something" << endl;
+	virtual void write() {
+		cout << "write something" << endl;
 		writeData();
 		writeResult();
 	}
@@ -26,7 +28,7 @@ protected:
 
 class Computer {
 public:
-	void compute() { cout << "compute something" << endl; }
+	virtual void compute() { cout << "compute something" << endl; }
 private:
 
 };
@@ -34,55 +36,56 @@ private:
 // Reader 종속해서 원하는데로 구현 실제 로드 밸런싱에선 Reader 받아서 read함
 class ReaderSample : virtual public Reader {
 public:
-	void read() { cout << "실제 read할꺼 넣으셔서 오버라이드" << endl; 
-	readCondition();
-	readData();
+	void read() {
+		cout << "Reader Sample" << endl;
+		readCondition();
+		readData();
 	}
-	void readData() { cout << "가능하면 이런식으로 받을 수 있으면 또는 vector를 받던지" << endl; }
+	void readData() { cout << "Read Data Sample" << endl; }
 	void readCondition() { cout << "read something condition" << endl; }
 };
 
 class WriterSample : public Writer {
 public:
 	void write() {
-		cout << "LoadBalancing에선 그냥 이거 쓸꺼" << endl;
+		cout << "Writer Sample" << endl;
 		this->writeData(); // 혹은 부모꺼 써버리던지 
 		this->writeResult();
 	}
 private:
 };
 
-class LoadBalancing {
+class ExtendedLoadBalancing {
 public:
 	Reader* reader;
 	Writer* writer;
 	Computer* computer;
 public:
-	LoadBalancing() {
+	ExtendedLoadBalancing() {
 		reader = new Reader;
 		writer = new Writer;
 		computer = new Computer;
 		init();
 	}
-	LoadBalancing(Reader* reader) {
+	ExtendedLoadBalancing(Reader* reader) {
 		this->reader = reader;
 		init();
 	}
-	LoadBalancing(Writer* writer) {
+	ExtendedLoadBalancing(Writer* writer) {
 		this->writer = writer;
 		init();
 	}
-	LoadBalancing(Computer* computer) {
+	ExtendedLoadBalancing(Computer* computer) {
 		this->computer = computer;
 		init();
 	}
-	LoadBalancing(Reader* reader, Writer* writer)
+	ExtendedLoadBalancing(Reader* reader, Writer* writer)
 	{
 		this->reader = reader;
 		this->writer = writer;
 		init();
 	}
-	LoadBalancing(Reader* reader, Writer* writer, Computer* computer) {
+	ExtendedLoadBalancing(Reader* reader, Writer* writer, Computer* computer) {
 		this->reader = reader;
 		this->writer = writer;
 		this->computer = computer;
@@ -93,5 +96,75 @@ public:
 		reader->read();
 		computer->compute();
 		writer->write();
+	}
+};
+
+extern vector<menu> men;
+extern vector<barista> bari;
+extern queue<order> ord;
+
+extern void load();
+extern void test();
+
+// Basic 단계 구현 시간 조건 없을 때 로드밸런싱 
+// 이후 시간 및 다른 조건 추가에 따른 로드 밸런싱도 상속을 통해 구현 
+// 원한다면 상속을 통해 확장시켜 구현할 수 있게 하기를 목표로 하고있음
+
+class BasicReader : public Reader {
+public:
+	void read() {
+		load();
+	}
+};
+
+class BasicComputer : public Computer {
+private:
+
+public:
+	void compute() {
+		loadBalancing();
+	}
+
+	void loadBalancing() {
+		while (!isEmptyOrder()) {
+			order curOrd = selectOrder();
+			for (int i = 0; i < curOrd.getNumOfDrink(); i++)
+				distributeOrder(selectBarista());
+		}
+	}
+
+	bool isEmptyOrder() {
+		return ord.empty();
+	}
+
+	order selectOrder() {
+		return ord.front();
+	}
+
+	void distributeOrder(int selected) {
+		bari[selected].incNumOfCofMade();
+		ord.pop();
+	}
+
+	int selectBarista() {
+		int min = 1000;
+		barista curBari;
+		int bariId;
+		for (int i = 0; i < bari.size(); i++)
+			if (min > bari[i].getNumOfCofMade())
+			{
+				min = bari[i].getNumOfCofMade();
+				curBari = bari[i];
+				bariId = i;
+			}
+		return bariId;
+	}
+
+};
+
+class BasicWriter : public Writer {
+public:
+	void write() {
+		test();
 	}
 };

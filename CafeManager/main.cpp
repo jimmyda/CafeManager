@@ -33,9 +33,9 @@ int main() {
 
 	// loadBalancing
 	//start();
-	LoadBalancing loadbalncing; // virtual class 로 짜려햇는데 잘안됨
+	ExtendedLoadBalancing loadbalncing; // virtual class 로 짜려햇는데 잘안됨
 	cout << endl;
-	LoadBalancing loadbalncing2(new ReaderSample);
+	ExtendedLoadBalancing loadbalncing2(new ReaderSample);
 	//LoadBalancing loadbalncing3(new WriterSample); // 이런식으로 해도 되는 포인트 처리해줘야하지만
 
 	// test
