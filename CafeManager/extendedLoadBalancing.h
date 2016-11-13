@@ -45,7 +45,7 @@ public:
 	void readCondition() { cout << "read something condition" << endl; }
 };
 
-class WriterSample : public Writer {
+class WriterSample : virtual public Writer {
 public:
 	void write() {
 		cout << "Writer Sample" << endl;
@@ -110,14 +110,14 @@ extern void test();
 // 이후 시간 및 다른 조건 추가에 따른 로드 밸런싱도 상속을 통해 구현 
 // 원한다면 상속을 통해 확장시켜 구현할 수 있게 하기를 목표로 하고있음
 
-class BasicReader : public Reader {
+class BasicReader : virtual public Reader {
 public:
 	void read() {
 		load();
 	}
 };
 
-class BasicComputer : public Computer {
+class BasicComputer : virtual public Computer {
 private:
 
 public:
@@ -162,7 +162,7 @@ public:
 
 };
 
-class BasicWriter : public Writer {
+class BasicWriter : virtual public Writer {
 public:
 	void write() {
 		test();
