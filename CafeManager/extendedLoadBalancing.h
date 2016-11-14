@@ -34,7 +34,7 @@ private:
 };
 
 // Reader 종속해서 원하는데로 구현 실제 로드 밸런싱에선 Reader 받아서 read함
-class ReaderSample : virtual public Reader {
+class ReaderSample : public Reader {
 public:
 	void read() {
 		cout << "Reader Sample" << endl;
@@ -45,7 +45,7 @@ public:
 	void readCondition() { cout << "read something condition" << endl; }
 };
 
-class WriterSample : virtual public Writer {
+class WriterSample : public Writer {
 public:
 	void write() {
 		cout << "Writer Sample" << endl;
@@ -68,19 +68,26 @@ public:
 		init();
 	}
 	ExtendedLoadBalancing(Reader* reader) {
+		writer = new Writer;
+		computer = new Computer;
 		this->reader = reader;
 		init();
 	}
 	ExtendedLoadBalancing(Writer* writer) {
+		writer = new Writer;
+		computer = new Computer;
 		this->writer = writer;
 		init();
 	}
 	ExtendedLoadBalancing(Computer* computer) {
+		reader = new Reader;
+		writer = new Writer;
 		this->computer = computer;
 		init();
 	}
 	ExtendedLoadBalancing(Reader* reader, Writer* writer)
 	{
+		computer = new Computer;
 		this->reader = reader;
 		this->writer = writer;
 		init();
@@ -90,6 +97,11 @@ public:
 		this->writer = writer;
 		this->computer = computer;
 		init();
+	}
+	~ExtendedLoadBalancing() {
+		delete reader;
+		delete writer;
+		delete computer;
 	}
 
 	void init() {
@@ -110,14 +122,14 @@ extern void test();
 // 이후 시간 및 다른 조건 추가에 따른 로드 밸런싱도 상속을 통해 구현 
 // 원한다면 상속을 통해 확장시켜 구현할 수 있게 하기를 목표로 하고있음
 
-class BasicReader : virtual public Reader {
+class BasicReader : public Reader {
 public:
 	void read() {
 		load();
 	}
 };
 
-class BasicComputer : virtual public Computer {
+class BasicComputer : public Computer {
 private:
 
 public:
@@ -162,7 +174,7 @@ public:
 
 };
 
-class BasicWriter : virtual public Writer {
+class BasicWriter : public Writer {
 public:
 	void write() {
 		test();

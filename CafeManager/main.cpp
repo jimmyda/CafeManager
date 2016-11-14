@@ -35,8 +35,8 @@ int main() {
 	// loadBalancing
 	//start();
 	//ExtendedLoadBalancing loadbalncing; 
-	ExtendedLoadBalancing loadbalncing2(new ReaderSample);
-	//ExtendedLoadBalancing loadbalncing3(new BasicReader, new BasicWriter, new BasicComputer);
+	//ExtendedLoadBalancing loadbalncing2(new ReaderSample);
+	ExtendedLoadBalancing loadbalncing3(new BasicReader, new BasicWriter, new BasicComputer);
 
 	// test
 	//test();
