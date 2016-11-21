@@ -1,6 +1,10 @@
 #pragma once
 #include <iostream>
+#include "resultObserver.h"
+
 using namespace std;
+
+extern resultObserver *observer;
 
 class Reader {
 public:
@@ -60,6 +64,8 @@ public:
 	Reader* reader;
 	Writer* writer;
 	Computer* computer;
+	
+
 public:
 	ExtendedLoadBalancing() {
 		reader = new Reader;
@@ -130,18 +136,26 @@ public:
 };
 
 class BasicComputer : public Computer {
-private:
-
+	
 public:
+	
 	void compute() {
 		loadBalancing();
 	}
 
 	void loadBalancing() {
+		
+		observer = new resultObserver(ord.size());	//결과물 기록을 위한 Observer객체 생성
+
 		while (!isEmptyOrder()) {
 			order curOrd = selectOrder();
+
 			for (int i = 0; i < curOrd.getNumOfDrink(); i++)
-				distributeOrder(selectBarista());
+			{
+				int selected_barista = selectBarista();
+				observer->insertResult(curOrd.getOrderNum(), selected_barista);
+				distributeOrder(selected_barista);
+			}
 		}
 	}
 
@@ -177,6 +191,7 @@ public:
 class BasicWriter : public Writer {
 public:
 	void write() {
-		test();
+		//test();
+		observer->showResult();
 	}
 };
