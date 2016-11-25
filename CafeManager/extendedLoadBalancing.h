@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include "resultObserver.h"
+#include "myTime.h"
 
 using namespace std;
 
@@ -193,5 +194,24 @@ public:
 	void write() {
 		//test();
 		observer->showResult();
+	}
+};
+
+// read , write 큰 차이 없음 basic 때 이미 시간에 관해서 다루었기 때문
+class ReaderWithTime : public BasicReader {
+
+};
+
+class WriterWithTime : public BasicWriter {
+
+};
+
+class ComputerWithTime : public Computer {
+	void compute() {
+		loadBalancingWithTime();
+	}
+
+	void loadBalancingWithTime() {
+
 	}
 };
