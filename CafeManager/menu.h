@@ -31,7 +31,7 @@ public:
 	int getRank() { return makeableRank; }
 
 	// mutator
-	void setMakeTime(int time) { makeTime = time; }
+	//void setMakeTime(int time) { makeTime = time; }
 
 	// function
 
@@ -43,4 +43,3 @@ void menu::funcName(type param, ..) {
 
 }
 */
-
