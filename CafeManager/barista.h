@@ -15,7 +15,7 @@ public:
 		totalMade = -1;
 		numOfCofMade = -1;
 		rank = -1;
-		bool doing = false;
+		doing = false;
 		finishMakingTime.setTime("06:00:00");
 		// to do something
 	}
@@ -23,7 +23,7 @@ public:
 		totalMade = 0;
 		numOfCofMade = 0;
 		rank = prof;
-		bool doing = false;
+		doing = false;
 		// to do something
 
 	}
@@ -46,6 +46,7 @@ public:
 	void endWork() { doing = false; }	// 바리스타가 음료제조를 완료
 	int currentWork();
 	void endOfDay();
+	//void addFinishMakingTime(myTime t) {}
 };
 
 // 하루가 끝나면 전날까지 만들었던 총 커피수에 오늘만든 커피수를 더해준다

@@ -67,12 +67,20 @@ void selectBarista(order ord) {
 				min = bari[i].getNumOfCofMade();
 				minIndex = i;
 			}
-		}
 
-		bari[minIndex].setFinishMakingTime(ord.getOrderTime() + men[menuIndex].getMakeTime());
+		}
+		
+		if (bari[minIndex].getDoing()) {
+			bari[minIndex].setFinishMakingTime(bari[minIndex].getFinishMakingTime() + men[menuIndex].getMakeTime());
+
+		}
+		else {
+			bari[minIndex].setFinishMakingTime(ord.getOrderTime() + men[menuIndex].getMakeTime());
+		}
 		bari[minIndex].incNumOfCofMade();
 		cout << "몇번 바리스타 :" << minIndex << " 완료시간:"<< bari[minIndex].getFinishMakingTime() << endl;
 		workIndex.push(make_pair(minIndex, bari[minIndex].getFinishMakingTime().getTimeSec()));
+		bari[minIndex].doWork();
 		// 
 
 
@@ -98,10 +106,17 @@ void selectBarista(order ord) {
 				}
 			}
 
-			bari[minIndex].setFinishMakingTime(ord.getOrderTime() + men[menuIndex].getMakeTime());
+			if (bari[minIndex].getDoing()) {
+				bari[minIndex].setFinishMakingTime(bari[minIndex].getFinishMakingTime() + men[menuIndex].getMakeTime());
+				
+			}
+			else {
+				bari[minIndex].setFinishMakingTime(ord.getOrderTime() + men[menuIndex].getMakeTime());
+			}
 			bari[minIndex].incNumOfCofMade();
 			cout << "몇번 바리스타 :" << minIndex << " 완료시간:" << bari[minIndex].getFinishMakingTime() << endl;
 			workIndex.push(make_pair(minIndex, bari[minIndex].getFinishMakingTime().getTimeSec()));
+			bari[minIndex].doWork();
 		}
 	}
 }
@@ -155,6 +170,7 @@ void start() {
 			// 주문 완료시간(pop)
 			while(!workIndex.empty() && (bari[workIndex.top().first].getFinishMakingTime() == curTime)){
 				cout << "바리스타 번호 : "<< workIndex.top().first << " 종료시간 :" << curTime << endl;
+				bari[workIndex.top().first].endWork();
 				workIndex.pop();
 			}
 
@@ -163,7 +179,7 @@ void start() {
 
 			// to do something
 			// 어떤 바리스타가 제조중인 음료가 완료될 시간일 경우 바리스타의 플래그를 false로 만들어주고 제조완료 메세지 출력
-			findEndOrder();
+			//findEndOrder();
 		}
 		
 	}
