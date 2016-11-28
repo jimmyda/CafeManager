@@ -19,7 +19,7 @@ void loadOrderFile(string fileName);
 vector<menu> men;		// 모든 메뉴 정보를 저장해둘 vector형 자료구조
 vector<barista> bari;	// 모든 바리스타 정보 저장해둘 vector형 자료구조
 queue<order> ord;		// 모든 주문정보를 저장해둘 queue형 자료구조
-resultObserver *observer;
+//resultObserver *observer;
 string drinkName;	// 메뉴 이름
 
 // main 안에 깔끔하게 해서 구분하기 편하게 하기 위해 테스트 함수 따로 뺀거
@@ -33,12 +33,15 @@ void test();
 
 int main() {
 
-	// loadBalancing
-	//start();
+	load();
+	start();
+	for (int i = 0; i < bari.size(); i++) {
+		cout << "i번 :" << i <<"수량 :" << bari[i].getNumOfCofMade() << endl;
+	}
 	//ExtendedLoadBalancing loadbalncing; 
 	//ExtendedLoadBalancing loadbalncing2(new ReaderSample);
 	//ExtendedLoadBalancing loadbalncing3(new BasicReader, new BasicWriter, new BasicComputer);
-	ExtendedLoadBalancing loadbalncing4(new ReaderWithTime, new WriterWithTime, new ComputerWithTime);
+	//ExtendedLoadBalancing loadbalncing4(new ReaderWithTime, new WriterWithTime, new ComputerWithTime);
 	// test
 	//test();
 	
