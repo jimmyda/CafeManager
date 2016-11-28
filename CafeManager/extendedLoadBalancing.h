@@ -206,12 +206,49 @@ class WriterWithTime : public BasicWriter {
 
 };
 
-class ComputerWithTime : public Computer {
+class ComputerWithTime : public BasicComputer {
+private:
+	int rankedMakingTime[5] = { 15,13,10,7,3 };	// rank 에 따른 제조 완료 시간
+
+public:
 	void compute() {
 		loadBalancingWithTime();
 	}
 
 	void loadBalancingWithTime() {
+		observer = new resultObserver(ord.size());	//결과물 기록을 위한 Observer객체 생성
 
+		while (!isEmptyOrder()) {
+			order curOrd = selectOrder();
+
+			for (int i = 0; i < curOrd.getNumOfDrink(); i++)
+			{
+				int selected_barista = selectBarista(curOrd);
+				observer->insertResult(curOrd.getOrderNum(), selected_barista);
+				distributeOrder(selected_barista, curOrd);
+			}
+		}
+	}
+
+	int selectBarista(order& curOrd) {
+		int min = 1000;
+		barista curBari;
+		int bariId;
+		for (int i = 0; i < bari.size(); i++)
+			if (min > bari[i].getNumOfCofMade() 
+				&& curOrd.getOrderTime() > bari[i].getFinishMakingTime())
+			{
+				min = bari[i].getNumOfCofMade();
+				curBari = bari[i];
+				bariId = i;
+			}
+		return bariId;
+	}
+
+	void distributeOrder(int selected, order& curOrd) {
+		bari[selected].incNumOfCofMade();
+		bari[selected].setFinishMakingTime(
+			curOrd.getOrderTime() + rankedMakingTime[bari[selected].getRank()]);
+		ord.pop();
 	}
 };
