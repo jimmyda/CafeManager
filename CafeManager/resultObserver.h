@@ -33,7 +33,7 @@ public :
 
 		for (int i = 0; i < results.size(); i++)
 		{
-			cout << "주문 번호 : " << results.at(i).order << "는 바리스타 " << results.at(i).baristaId << "에게 접수되었습니다." << endl;
+			cout << "주문 번호 : " << results[i].order << "는 바리스타 " << results[i].baristaId << "에게 접수되었습니다." << endl;
 		}
 
 

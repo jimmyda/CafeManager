@@ -33,12 +33,29 @@ void test();
 
 int main() {
 
-	// loadBalancing
-	//start();
+	load();// loadBalancing
+	start();
 	//ExtendedLoadBalancing loadbalncing; 
 	//ExtendedLoadBalancing loadbalncing2(new ReaderSample);
-	ExtendedLoadBalancing loadbalncing3(new BasicReader, new BasicWriter, new BasicComputer);
+	//ExtendedLoadBalancing loadbalncing3(new BasicReader, new BasicWriter, new BasicComputer);
 
+	/*
+	for (int i = 0; i < bari.size(); i++) {
+		cout << bari[i].getRank() << endl;
+	}
+	cout << endl;
+	bari.pop_back();
+
+	for (int i = 0; i < bari.size(); i++) {
+		cout << bari[i].getRank() << endl;
+	}
+	cout << endl;
+	barista temp(1);
+	bari.insert(bari.begin()+4, temp);
+	for (int i = 0; i < bari.size(); i++) {
+		cout << bari[i].getRank() << endl;
+	}
+	*/
 	// test
 	//test();
 	
@@ -51,7 +68,7 @@ void test() {
 	int i;
 
 	for (i = 0; i < men.size(); i++)
-		cout << i << "번 메뉴, 메뉴이름 :" << men[i].getDrinkName() << " 만드는 시간 :" << men[i].getMakeTime() << "분" << endl;
+		cout << i << "번 메뉴, 메뉴이름 :" << men[i].getDrinkName() << endl;
 	cout << endl;
 
 	for (i = 0; i < bari.size(); i++)
@@ -61,7 +78,7 @@ void test() {
 	for (i = 0; i < bari.size(); i++) {
 		cout << i << "번 바리스타, 주문량 : " << bari[i].getNumOfCofMade() << endl;
 	}
-
+	
 	while (!ord.empty()) {
 		cout << "주문번호 : " << ord.front().getOrderNum() << " 주문시각 : " << ord.front().getOrderTime()
 			<< " 주문메뉴 :" << ord.front().getDrinkName() << " 주문수량 :" << ord.front().getNumOfDrink() << endl;
@@ -111,8 +128,8 @@ void loadMenuFile(string fileName) {
 
 	in >> numOfMenu;
 	for (i = 0; i < numOfMenu; i++) {
-		in >> drinkName >> makeTime >> drinkPrice >> makableRank;
-		menu temp(drinkName, makeTime, drinkPrice, makableRank);
+		in >> drinkName >> drinkPrice >> makableRank;
+		menu temp(drinkName, drinkPrice, makableRank);
 		men.push_back(temp);
 	}
 	cout << fileName << " load complete" << endl;

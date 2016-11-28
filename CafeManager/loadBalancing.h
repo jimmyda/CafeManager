@@ -19,9 +19,10 @@ CafeManager에 적용 시켜 보면
 extern vector<menu> men;
 extern vector<barista> bari;
 extern queue<order> ord;
+
 //vector<int, int> workIndex;
 
-#define MAX_ORDER 10 // 바리스타 개인이 받을 수 있는 최대 주문량
+//#define MAX_ORDER 10 // 바리스타 개인이 받을 수 있는 최대 주문량
 /*
 int searchMakeTime(string drinkName, int begin, int end) {
 	int mid = (begin + end) / 2;
@@ -77,9 +78,10 @@ void findEndOrder() {
 void start() {
 	int totalMake = 0;	// 모든 바리스타 만든 총 음료수
 	myTime curTime;// = "08:30:00";	// 진행 현재 시각(시간에 흐름에 따라 진행)
-
+	
 	// 큐에 잇는 주문이 다 빌 때까지
 	while (!ord.empty()) {
+
 		order curOrd = ord.front(); // 가장 앞에잇는 주문을 가져옴
 		if (curOrd.getOrderTime() == curTime) {		// 맨 앞의 주문이 현재 시각과 같을경우
 
