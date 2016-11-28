@@ -10,6 +10,8 @@ using namespace std;
 결과를 출력하는 클래스
 */
 
+extern vector<barista> bari;
+
 class resultObserver
 {
 public :
@@ -36,7 +38,10 @@ public :
 			cout << "주문 번호 : " << results[i].order << "는 바리스타 " << results[i].baristaId << "에게 접수되었습니다." << endl;
 		}
 
-
-
+		cout << "\n바리스타 별 통계" << endl;
+		for (int i = 0; i < bari.size(); i++) {
+			cout << "바리스타 " << i << "번 : " << bari[i].getNumOfCofMade() << "/" << this->numOfOrders << endl;
+		}
+		cout << endl;
 	}
 };

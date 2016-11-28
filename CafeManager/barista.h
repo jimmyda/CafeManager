@@ -1,4 +1,5 @@
 #pragma once
+#include "myTime.h"
 
 class barista {
 private:
@@ -6,6 +7,7 @@ private:
 	int numOfCofMade;	// 오늘 만든 커피의 수
 	int rank;	// 바리스타의 랭크 (0 ~ 5, 변수명이 어렵고 길어서 바꿈)
 	bool doing; // flag(바리스타가 음료를 만드는 중이면 true 아니면 false)
+	myTime finishMakingTime;
 
 public:
 	// 생성자
@@ -14,6 +16,7 @@ public:
 		numOfCofMade = -1;
 		rank = -1;
 		bool doing = false;
+		finishMakingTime.setTime("06:00:00");
 		// to do something
 	}
 	barista(int prof) {
@@ -30,9 +33,11 @@ public:
 	int getRank() { return rank; }
 	int getTotalMade() { return totalMade; }
 	bool getDoing() { return doing; }	// 음료를 제조중인지 확인
+	myTime getFinishMakingTime() { return finishMakingTime; }
 
 	// mutator
 	void setRank(int prof) { rank = prof; }
+	void setFinishMakingTime(myTime t) { finishMakingTime = t; }
 	void incNumOfCofMade() { numOfCofMade++; }	// numOfCofMade++
 	void incNumOfCofMade(int numOfCof) { numOfCofMade += numOfCof; }
 
