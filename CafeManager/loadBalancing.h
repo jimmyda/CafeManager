@@ -124,15 +124,37 @@ void start() {
 			if (workIndex.size() == bari.size()) {
 				string curDrinkName = curOrd.getDrinkName();
 				int curMakeTime;
+				int curRank;
 				for (int i = 0; i < men.size(); i++) {
 					if (curDrinkName == men[i].getDrinkName()) {
 						curMakeTime = men[i].getMakeTime();
+						curRank = men[i].getRank();
 						break;
 					}
 				}
 				
-				int bariNum = workIndex.top().first;
-				int bariTime = workIndex.top().second;
+				int bariNum;
+				int bariTime;
+				// prirority_queue에서 제조가능한 바리스타 찾는 loop
+				priority_queue< pair<int, int> > tempQ;
+				while (true) {
+					bariNum = workIndex.top().first;
+					bariTime = workIndex.top().second;
+					// 바리스타가 해당 주문을 제조 가능하지 못하면 tempQ에 빼둠
+					if (bari[bariNum].getRank() < curRank) {
+						tempQ.push(make_pair(bariNum, bariTime));
+						tempQ.pop();
+					}
+					// 찾으면 break
+					else
+						break;
+				}
+				// 꺼내 두었던 바리스타들 다시 priority_queue에 넣는거
+				while (!tempQ.empty()) {
+					workIndex.push(make_pair(tempQ.top().first, tempQ.top().second));
+					tempQ.pop();
+				}
+
 				bariTime = bariTime + curMakeTime;
 				workIndex.pop();
 				workIndex.push(make_pair(bariNum, bariTime));
