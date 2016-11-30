@@ -150,13 +150,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="barista.h" />
-    <ClInclude Include="extendedLoadBalancing.h" />
     <ClInclude Include="loadBalancing.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="myTime.h" />
     <ClInclude Include="order.h" />
-    <ClInclude Include="resultObserver.h" />
-    <ClInclude Include="Result.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="barista.txt" />

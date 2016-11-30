@@ -6,7 +6,6 @@
 #include "order.h"
 #include "myTime.h"
 #include "loadBalancing.h"
-#include "extendedLoadBalancing.h"
 
 using namespace std;
 
@@ -35,67 +34,9 @@ int main() {
 
 	load();
 	start();
-	/*
-	for (int i = 0; i < bari.size(); i++) {
-		cout << "i번 :" << i <<"수량 :" << bari[i].getNumOfCofMade() << endl;
-	}
-	*/
-	//ExtendedLoadBalancing loadbalncing; 
-	//ExtendedLoadBalancing loadbalncing2(new ReaderSample);
-	//ExtendedLoadBalancing loadbalncing3(new BasicReader, new BasicWriter, new BasicComputer);
-	//ExtendedLoadBalancing loadbalncing4(new ReaderWithTime, new WriterWithTime, new ComputerWithTime);
-	// test
-	//test();
 	
 	return 0;
 }
-
-// 이거 UI 클래스라도 만들든지 해서 쉽게 변경 가능하게 할 필요 있음
-// 박현준 : 나중에 지워야할 부분이라 괜찮아요
-void test() {
-	int i;
-
-	for (i = 0; i < men.size(); i++)
-		cout << i << "번 메뉴, 메뉴이름 :" << men[i].getDrinkName() << " 만드는 시간 :" << men[i].getMakeTime() << "분" << endl;
-	cout << endl;
-
-	for (i = 0; i < bari.size(); i++)
-		cout << i << "번 바리스타, 숙련도 :" << bari[i].getRank() << endl;
-	cout << endl;
-
-	for (i = 0; i < bari.size(); i++) {
-		cout << i << "번 바리스타, 주문량 : " << bari[i].getNumOfCofMade() << endl;
-	}
-
-	while (!ord.empty()) {
-		cout << "주문번호 : " << ord.front().getOrderNum() << " 주문시각 : " << ord.front().getOrderTime()
-			<< " 주문메뉴 :" << ord.front().getDrinkName() << " 주문수량 :" << ord.front().getNumOfDrink() << endl;
-		ord.pop();
-	}
-	cout << endl;
-
-	// myTime.h 관련 테스트 and 사용법
-	/*myTime t1 = "08:30:00";
-	myTime t2 = "25:62:80"; // 잘못된 데이터가 들어왔을경우 getSec()을 호출해주면 바른 데이터로 바뀐다(근데 그럴일은 없을듯..)
-	cout << t1 << " " << t2 << endl;
-	cout << t2.getHour() << ":" << t2.getMin() << ":" << t2.getSec() << endl;
-	cout << t1 << " " << t2 << endl;
-	myTime t3 = "08:30:00";
-	if (t1 == t3) // 쉽게 시간이 같은지(주문시간과 진행시간) 비교 가능
-		cout << "같습니다" << endl;
-	
-	for (int i = 0; i < 30; i++) {
-		++t3;
-	}
-	++t3;
-	cout << t1 << " " << t3 << endl;
-	t1 = t3 + 5;
-	cout << t1 << " " << t3 << endl;
-	cout << endl;
-
-	*/
-}
-
 
 /****************************
 메뉴에 대한 데이터를 읽어온다

@@ -29,17 +29,4 @@ public:
 	int getMakeTime() { return makeTime; }
 	int getDrinkPrice() { return drinkPrice; }
 	int getRank() { return makeableRank; }
-
-	// mutator
-	//void setMakeTime(int time) { makeTime = time; }
-
-	// function
-
 };
-
-
-/* 이런식으로 함수 추가 구현
-void menu::funcName(type param, ..) {
-
-}
-*/
