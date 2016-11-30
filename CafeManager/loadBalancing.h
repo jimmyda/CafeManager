@@ -35,7 +35,6 @@ void selectBarista(order ord) {
 			break;
 		}
 	}
-//	int makeTime = searchMakeTime(drinkName, 0, men.size());
 
 	if (numOfDrink == 1) { // 주문 받은 1개이면
 	// 오름차순으로 정렬되있으므로 숙련도가 높은 barista부터 찾음(뒤부터 search)
