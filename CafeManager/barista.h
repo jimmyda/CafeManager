@@ -1,80 +1,58 @@
 #pragma once
-#include "menu.h"
-#include <vector>
+#include "myTime.h"
 
 class barista {
 private:
 	int totalMade;		// 바리스타가 만든 총 커피의 수
 	int numOfCofMade;	// 오늘 만든 커피의 수
-	int proficiency;	// 바리스타의 숙련도 (0 ~ 5)
-	int numOfMakableMenu;	// // 바리스타가 만들 수 있는 메뉴의 수
-	vector<menu> makable;	// 바리스타가 만들수 있는 제조 메뉴, 이걸통해 숙련도에 따른 바리스타의 음료 제조 시간을 미리 계산해 둘수 있도록
+	int rank;	// 바리스타의 랭크 (0 ~ 5, 변수명이 어렵고 길어서 바꿈)
+	bool doing; // flag(바리스타가 음료를 만드는 중이면 true 아니면 false)
+	myTime finishMakingTime;
 
 public:
 	// 생성자
 	barista() {	//  디폴트 생성자
 		totalMade = -1;
 		numOfCofMade = -1;
-		proficiency = -1;
-		numOfMakableMenu = -1;
+		rank = -1;
+		doing = false;
+		finishMakingTime.setTime("06:00:00");
 		// to do something
-
 	}
-	barista(int prof, int num) {
+	barista(int prof) {
 		totalMade = 0;
 		numOfCofMade = 0;
-		proficiency = prof;
-		numOfMakableMenu = num;
+		rank = prof;
+		doing = false;
 		// to do something
 
 	}
 
 	// accessor
 	int getNumOfCofMade() { return numOfCofMade; }
-	int getProficiency() { return proficiency; }
+	int getRank() { return rank; }
 	int getTotalMade() { return totalMade; }
-	int getNumOfMakeableMenu() { return numOfMakableMenu; }
+	bool getDoing() { return doing; }	// 음료를 제조중인지 확인
+	myTime getFinishMakingTime() { return finishMakingTime; }
 
 	// mutator
-	void setProficiency(int prof) { proficiency = prof; }
+	void setRank(int prof) { rank = prof; }
+	void setFinishMakingTime(myTime t) { finishMakingTime = t; }
 	void incNumOfCofMade() { numOfCofMade++; }	// numOfCofMade++
+	void incNumOfCofMade(int numOfCof) { numOfCofMade += numOfCof; }
 
-												// function
+	// function
+	void doWork() { doing = true; }	// 바리스타가 음료제조를 시작
+	void endWork() { doing = false; }	// 바리스타가 음료제조를 완료
+	int currentWork();
 	void endOfDay();
-	int baristaMakeTime(string drink);	// 숙련도에 따른 바리스타의 음료 제조 시간
+	//void addFinishMakingTime(myTime t) {}
 };
-
 
 // 하루가 끝나면 전날까지 만들었던 총 커피수에 오늘만든 커피수를 더해준다
 void barista::endOfDay() {
 	totalMade += numOfCofMade;
 	numOfCofMade = 0;
-}
-
-// 숙련도에 따른 바리스타의 음료 제조 시간
-int barista::baristaMakeTime(string drink) {
-	// to do something
-	int makeTime = -1;
-
-
-	/*
-	switch (proficiency) {
-	case 0:
-
-	case 1:
-
-	case 2:
-
-	case 3:
-
-	case 4:
-
-	case 5:
-
-	}
-	*/
-	return makeTime;
-
 }
 
 /* 이런식으로 함수 추가 구현
@@ -83,3 +61,11 @@ void barista::funcName(type param, ..) {
 }
 */
 
+int barista::currentWork() {
+	//return this->getNumOfCofMade();
+	/***************************************************
+	   이것도 마찬가지이고 이 함수는 그냥 getNumOfCofMade() 접근자와 똑같은 함수이기 때문에 삭제하시고
+	   getNumOfCofMade() 사용해주세요(같은 내용 함수 이중 호출)
+	***************************************************/
+	return numOfCofMade;
+}

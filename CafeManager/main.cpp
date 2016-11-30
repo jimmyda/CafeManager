@@ -1,99 +1,71 @@
 #include <iostream>
 #include <fstream>
 #include <queue>
+#include "menu.h"
 #include "barista.h"
 #include "order.h"
+#include "myTime.h"
+#include "loadBalancing.h"
+#include "extendedLoadBalancing.h"
 
 using namespace std;
+
+// fstream functions
+void loadMenuFile(string fileName);
+void loadBaristaFile(string fileName);
+void loadOrderFile(string fileName);
+
 
 vector<menu> men;		// 모든 메뉴 정보를 저장해둘 vector형 자료구조
 vector<barista> bari;	// 모든 바리스타 정보 저장해둘 vector형 자료구조
 queue<order> ord;		// 모든 주문정보를 저장해둘 queue형 자료구조
+//resultObserver *observer;
+string drinkName;	// 메뉴 이름
+
+// main 안에 깔끔하게 해서 구분하기 편하게 하기 위해 테스트 함수 따로 뺀거
+void load() {
+	loadMenuFile("menu.txt");
+	loadBaristaFile("barista.txt");
+	loadOrderFile("order.txt");
+	cout << endl;
+}
+void test();
 
 int main() {
 
-	int i, j;
-	int numOfMenu;	// 총 메뉴의 숫자
-	int numOfBarista;	// 총 바리스타의 숫자
-	string drinkName;	// 메뉴 이름
-	int makeTime, drinkPrice;	// 메뉴를 만드는데 걸리는 시간, 메뉴의 가격
-	int numOfMakableMenu;	// 바리스타가 만들 수 있는 메뉴의 수
-	int proficiency;	// 바리스타의 숙련도 (0 ~ 5)
-	int orderNum;		// 주문번호
-	int customerNum;	// 고객번호
-	string orderTime;	// 주문시간
-	int numOfDrink;		// 주문수량
-
-						/****************************
-						메뉴에 대한 데이터를 받는다
-						****************************/
-	cout << "메뉴 데이터를 읽어옵니다." << endl;
-	ifstream in("menu.txt");
-	if (in.fail()) {
-		cout << "menu file open fail" << endl;
-		return 1;
+	load();
+	start();
+	/*
+	for (int i = 0; i < bari.size(); i++) {
+		cout << "i번 :" << i <<"수량 :" << bari[i].getNumOfCofMade() << endl;
 	}
-
-	in >> numOfMenu;
-	for (i = 0; i < numOfMenu; i++) {
-		in >> drinkName >> makeTime >> drinkPrice;
-		menu temp(drinkName, makeTime, drinkPrice);
-		men.push_back(temp);
-	}
-	cout << "메뉴 데이터 로딩 완료." << endl;
-	in.close();
-
-	/******************************
-	바리스타에 대한 데이터를 받는다
-	******************************/
-	cout << "바리스타 데이터를 읽어옵니다." << endl;
-	in.open("barista.txt");
-	if (in.fail()) {
-		cout << "barista file open fail" << endl;
-		return 1;
-	}
-
-	in >> numOfBarista;
-	for (i = 0; i < numOfBarista; i++) {
-		in >> proficiency >> numOfMakableMenu;
-		barista temp(proficiency, numOfMakableMenu);
-		bari.push_back(temp);
-		for (j = 0; j < numOfMakableMenu; j++) {
-			in >> drinkName;
-			// To do something  
-			// 받은 음료 정보를 barista.h의 vector형 makable에 추가 저장하려고 생각중
-		}
-
-	}
-	cout << "바리스타 데이터를 로딩 완료." << endl;
-	in.close();
-
-	/*********************************
-	주문에 대한 데이터를 큐에 저장한다
-	**********************************/
-	cout << "주문 데이터를 큐로 읽어옵니다." << endl;
-	in.open("order.txt");
-	if (in.fail()) {
-		cout << "order file open fail" << endl;
-		return 1;
-	}
-
-	while (!in.eof()) {
-		in >> orderNum >> customerNum >> orderTime >> drinkName >> numOfDrink;
-		order temp(orderNum, customerNum, orderTime, drinkName, numOfDrink);
-		ord.push(temp);
-	}
-	cout << "주문 데이터를 큐에 로딩 완료." << endl;
-	in.close();
-
+	*/
+	//ExtendedLoadBalancing loadbalncing; 
+	//ExtendedLoadBalancing loadbalncing2(new ReaderSample);
+	//ExtendedLoadBalancing loadbalncing3(new BasicReader, new BasicWriter, new BasicComputer);
+	//ExtendedLoadBalancing loadbalncing4(new ReaderWithTime, new WriterWithTime, new ComputerWithTime);
 	// test
-	for (i = 0; i < numOfMenu; i++)
-		cout << i << "번 메뉴, 메뉴이름 :" << men[i].getDrinkName() << " 만드는 시간 :" << men[i].getMakeTime() << "초" << endl;
+	//test();
+	
+	return 0;
+}
+
+// 이거 UI 클래스라도 만들든지 해서 쉽게 변경 가능하게 할 필요 있음
+// 박현준 : 나중에 지워야할 부분이라 괜찮아요
+void test() {
+	int i;
+
+	for (i = 0; i < men.size(); i++)
+		cout << i << "번 메뉴, 메뉴이름 :" << men[i].getDrinkName() << " 만드는 시간 :" << men[i].getMakeTime() << "분" << endl;
 	cout << endl;
 
-	for (i = 0; i < numOfBarista; i++)
-		cout << i << "번 바리스타, 숙련도 :" << bari[i].getProficiency() << " 만들수 있는 메뉴 종류 :" << bari[i].getNumOfMakeableMenu() << endl;
+	for (i = 0; i < bari.size(); i++)
+		cout << i << "번 바리스타, 숙련도 :" << bari[i].getRank() << endl;
 	cout << endl;
+
+	for (i = 0; i < bari.size(); i++) {
+		cout << i << "번 바리스타, 주문량 : " << bari[i].getNumOfCofMade() << endl;
+	}
 
 	while (!ord.empty()) {
 		cout << "주문번호 : " << ord.front().getOrderNum() << " 주문시각 : " << ord.front().getOrderTime()
@@ -102,5 +74,104 @@ int main() {
 	}
 	cout << endl;
 
-	return 1;
+	// myTime.h 관련 테스트 and 사용법
+	/*myTime t1 = "08:30:00";
+	myTime t2 = "25:62:80"; // 잘못된 데이터가 들어왔을경우 getSec()을 호출해주면 바른 데이터로 바뀐다(근데 그럴일은 없을듯..)
+	cout << t1 << " " << t2 << endl;
+	cout << t2.getHour() << ":" << t2.getMin() << ":" << t2.getSec() << endl;
+	cout << t1 << " " << t2 << endl;
+	myTime t3 = "08:30:00";
+	if (t1 == t3) // 쉽게 시간이 같은지(주문시간과 진행시간) 비교 가능
+		cout << "같습니다" << endl;
+	
+	for (int i = 0; i < 30; i++) {
+		++t3;
+	}
+	++t3;
+	cout << t1 << " " << t3 << endl;
+	t1 = t3 + 5;
+	cout << t1 << " " << t3 << endl;
+	cout << endl;
+
+	*/
+}
+
+
+/****************************
+메뉴에 대한 데이터를 읽어온다
+****************************/
+void loadMenuFile(string fileName) {
+
+	int i;
+	int numOfMenu;	// 총 메뉴의 숫자
+	int makeTime, drinkPrice;	// 메뉴를 만드는데 걸리는 시간, 메뉴의 가격
+	int makableRank;	// 이 메뉴를 만드는데 필요한 바리스타 랭크
+
+	cout << fileName << " loading" << endl;
+	ifstream in(fileName);
+	if (in.fail()) {
+		cout << fileName << " open fail" << endl;
+		return;
+	}
+
+	in >> numOfMenu;
+	for (i = 0; i < numOfMenu; i++) {
+		in >> drinkName >> makeTime >> drinkPrice >> makableRank;
+		menu temp(drinkName, makeTime, drinkPrice, makableRank);
+		men.push_back(temp);
+	}
+	cout << fileName << " load complete" << endl;
+	in.close();
+}
+
+/********************************
+바리스타에 대한 데이터를 읽어온다
+********************************/
+void loadBaristaFile(string fileName) {
+
+	int i, j;
+	int numOfBarista;	// 총 바리스타의 숫자
+	int rank;	// 바리스타의 랭크 (0 ~ 5)
+		
+	cout << fileName << " loading" << endl;
+	ifstream in(fileName);
+	if (in.fail()) {
+		cout << fileName << " open fail" << endl;
+		return;
+	}
+
+	in >> numOfBarista;
+	for (i = 0; i < numOfBarista; i++) {
+		in >> rank;
+		barista temp(rank);
+		bari.push_back(temp);
+	}
+	cout << fileName << " load complete" << endl;
+	in.close();
+}
+
+/*********************************
+주문에 대한 데이터를 큐에 저장한다
+**********************************/
+void loadOrderFile(string fileName) {
+
+	int orderNum;		// 주문번호
+	int customerNum;	// 고객번호
+	string orderTime;	// 주문시간
+	int numOfDrink;		// 주문수량
+
+	cout << fileName << " loading" << endl;
+	ifstream in(fileName);
+	if (in.fail()) {
+		cout << fileName << " open fail" << endl;
+		return;
+	}
+
+	while (!in.eof()) {
+		in >> orderNum >> customerNum >> orderTime >> drinkName >> numOfDrink;
+		order temp(orderNum, customerNum, orderTime, drinkName, numOfDrink);
+		ord.push(temp);
+	}
+	cout << fileName << " load complete" << endl;
+	in.close();
 }
