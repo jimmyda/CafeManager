@@ -78,7 +78,9 @@ void selectBarista(order ord) {
 			bari[minIndex].setFinishMakingTime(ord.getOrderTime() + men[menuIndex].getMakeTime());
 		}
 		bari[minIndex].incNumOfCofMade();
+		cout << "요구 Rank: " << men[menuIndex].getRank() << endl;
 		cout << "몇번 바리스타 :" << minIndex << " 완료시간:"<< bari[minIndex].getFinishMakingTime() << endl;
+		cout << endl;
 		workIndex.push(make_pair(minIndex, bari[minIndex].getFinishMakingTime().getTimeSec()));
 		bari[minIndex].doWork();
 		// 
@@ -114,7 +116,9 @@ void selectBarista(order ord) {
 				bari[minIndex].setFinishMakingTime(ord.getOrderTime() + men[menuIndex].getMakeTime());
 			}
 			bari[minIndex].incNumOfCofMade();
+			cout << "요구 Rank: " << men[menuIndex].getRank() << endl;
 			cout << "몇번 바리스타 :" << minIndex << " 완료시간:" << bari[minIndex].getFinishMakingTime() << endl;
+			cout << endl;
 			workIndex.push(make_pair(minIndex, bari[minIndex].getFinishMakingTime().getTimeSec()));
 			bari[minIndex].doWork();
 		}
@@ -129,6 +133,7 @@ void findEndOrder() {
 void start() {
 	int totalMake = 0;	// 모든 바리스타 만든 총 음료수
 	myTime curTime = "08:30:00";	// 진행 현재 시각(시간에 흐름에 따라 진행)
+	int barinumber;
 	
 	// 큐에 잇는 주문이 다 빌 때까지
 	while (!ord.empty()) {
@@ -154,6 +159,7 @@ void start() {
 				priority_queue< pair<int, int> > tempQ;
 				while (true) {
 					bariNum = workIndex.top().first;
+					barinumber = bariNum;
 					bariTime = workIndex.top().second;
 					// 바리스타가 해당 주문을 제조 가능하지 못하면 tempQ에 빼둠
 					if (bari[bariNum].getRank() < curRank) {
@@ -163,6 +169,7 @@ void start() {
 					// 찾으면 break
 					else
 						break;
+					//barinumber = bariNum;
 				}
 				// 꺼내 두었던 바리스타들 다시 priority_queue에 넣는거
 				while (!tempQ.empty()) {
@@ -195,7 +202,6 @@ void start() {
 				bari[workIndex.top().first].endWork();
 				workIndex.pop();
 			}
-
 			++curTime;	// 시간을 1분 늘려줌
 			
 
@@ -203,7 +209,17 @@ void start() {
 			// 어떤 바리스타가 제조중인 음료가 완료될 시간일 경우 바리스타의 플래그를 false로 만들어주고 제조완료 메세지 출력
 			//findEndOrder();
 		}
-		
+	}
+	cout << endl;
+	cout << "<로드밸런싱 결과>" << endl;
+	for (int i = 0; i < barinumber; i++)
+	{
+		cout << i + 1 << "번 바리스타(Rank " << bari[i+1].getRank() << "): " << "[";
+		for (int j = 0; j < ((double)bari[i + 1].getNumOfCofMade() / totalMake) * 10.0; j++)
+			cout << "*";
+		for (int k = 10; k >((double)bari[i + 1].getNumOfCofMade() / totalMake) * 10.0; k--)
+			cout << " ";
+		cout << "]" << endl;
 	}
 }
 //수정
