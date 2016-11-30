@@ -39,18 +39,4 @@ public:
 	int getHour() { return orderTime.getHour(); }
 	int getMin() { return orderTime.getMin(); }
 	int getSec() { return orderTime.getSec(); }
-
-	// mutator
-
-
-	// function
-	// 시간의 비교연산은 myTime.h로 구현 예정
-	
 };
-
-
-/* 이런식으로 함수 추가 구현
-void order::funcName(type param..) {
-
-}
-*/
