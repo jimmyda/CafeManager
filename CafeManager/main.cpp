@@ -27,12 +27,12 @@ void load() {
 	string barista;
 	string order;
 
-	menu = "menu.txt";
+	//menu = "menu.txt";
 
 	order = "order.txt"; // 같은 시간대에 주문이 여러개 들어오는 경우
 	barista = "barista.txt";
 
-	//menu = "menu2.txt"; // 등급에 상관없이 주문을 분배하는 경우
+	menu = "menu2.txt"; // 등급에 상관없이 주문을 분배하는 경우
 	
 	//order = "order2.txt"; // 주문이 들어온 시간에 제조 가능한 바리스타가 없는 경우
 	//barista = "barista2.txt"; // 위에 조건에서 제조 가능한 바리스타가 둘인 경우
