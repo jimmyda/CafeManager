@@ -59,7 +59,7 @@ void selectBarista(order ord) {
 		bari[minIndex].incNumOfCofMade();
 		cout << "주문: " << men[menuIndex].getDrinkName() << endl;
 		cout << "요구 Rank: " << men[menuIndex].getRank() << endl;
-		cout << "몇번 바리스타 :" << minIndex << " 완료시간:"<< bari[minIndex].getFinishMakingTime() << endl;
+		cout << minIndex << " 번 바리스타" << " 완료시간:" << bari[minIndex].getFinishMakingTime() << endl;
 		cout << endl;
 		workIndex.push(make_pair(minIndex, bari[minIndex].getFinishMakingTime().getTimeSec()));
 		bari[minIndex].doWork();
@@ -85,7 +85,7 @@ void selectBarista(order ord) {
 			bari[minIndex].incNumOfCofMade();
 			cout << "주문: " << men[menuIndex].getDrinkName() << endl;
 			cout << "요구 Rank: " << men[menuIndex].getRank() << endl;
-			cout << "몇번 바리스타 :" << minIndex << " 완료시간:" << bari[minIndex].getFinishMakingTime() << endl;
+			cout << minIndex << " 번 바리스타" << " 완료시간:" << bari[minIndex].getFinishMakingTime() << endl;
 			cout << endl;
 			workIndex.push(make_pair(minIndex, bari[minIndex].getFinishMakingTime().getTimeSec()));
 			bari[minIndex].doWork();

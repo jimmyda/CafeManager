@@ -40,13 +40,22 @@
     <Text Include="help.txt">
       <Filter>리소스 파일</Filter>
     </Text>
-    <Text Include="order.txt">
-      <Filter>리소스 파일</Filter>
-    </Text>
     <Text Include="barista.txt">
       <Filter>리소스 파일</Filter>
     </Text>
+    <Text Include="order2.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
     <Text Include="menu.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
+    <Text Include="barista2.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
+    <Text Include="order.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
+    <Text Include="menu2.txt">
       <Filter>리소스 파일</Filter>
     </Text>
   </ItemGroup>

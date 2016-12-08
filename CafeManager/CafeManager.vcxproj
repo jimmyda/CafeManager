@@ -157,8 +157,11 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="barista.txt" />
+    <Text Include="barista2.txt" />
     <Text Include="help.txt" />
+    <Text Include="menu2.txt" />
     <Text Include="menu.txt" />
+    <Text Include="order2.txt" />
     <Text Include="order.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
