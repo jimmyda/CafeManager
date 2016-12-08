@@ -23,9 +23,23 @@ string drinkName;	// 메뉴 이름
 
 // main 안에 깔끔하게 해서 구분하기 편하게 하기 위해 테스트 함수 따로 뺀거
 void load() {
-	loadMenuFile("menu.txt");
-	loadBaristaFile("barista.txt");
-	loadOrderFile("order.txt");
+	string menu;
+	string barista;
+	string order;
+
+	menu = "menu.txt";
+
+	order = "order.txt"; // 같은 시간대에 주문이 여러개 들어오는 경우
+	barista = "barista.txt";
+
+	//menu = "menu2.txt"; // 등급에 상관없이 주문을 분배하는 경우
+	
+	//order = "order2.txt"; // 주문이 들어온 시간에 제조 가능한 바리스타가 없는 경우
+	//barista = "barista2.txt"; // 위에 조건에서 제조 가능한 바리스타가 둘인 경우
+	
+	loadMenuFile(menu);
+	loadBaristaFile(barista);
+	loadOrderFile(order);
 	cout << endl;
 }
 void test();

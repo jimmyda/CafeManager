@@ -35,7 +35,6 @@ void selectBarista(order ord) {
 			break;
 		}
 	}
-//	int makeTime = searchMakeTime(drinkName, 0, men.size());
 
 	if (numOfDrink == 1) { // 주문 받은 1개이면
 	// 오름차순으로 정렬되있으므로 숙련도가 높은 barista부터 찾음(뒤부터 search)
@@ -60,7 +59,7 @@ void selectBarista(order ord) {
 		bari[minIndex].incNumOfCofMade();
 		cout << "주문: " << men[menuIndex].getDrinkName() << endl;
 		cout << "요구 Rank: " << men[menuIndex].getRank() << endl;
-		cout << "몇번 바리스타 :" << minIndex << " 완료시간:"<< bari[minIndex].getFinishMakingTime() << endl;
+		cout << minIndex << " 번 바리스타" << " 완료시간:" << bari[minIndex].getFinishMakingTime() << endl;
 		cout << endl;
 		workIndex.push(make_pair(minIndex, bari[minIndex].getFinishMakingTime().getTimeSec()));
 		bari[minIndex].doWork();
@@ -86,7 +85,7 @@ void selectBarista(order ord) {
 			bari[minIndex].incNumOfCofMade();
 			cout << "주문: " << men[menuIndex].getDrinkName() << endl;
 			cout << "요구 Rank: " << men[menuIndex].getRank() << endl;
-			cout << "몇번 바리스타 :" << minIndex << " 완료시간:" << bari[minIndex].getFinishMakingTime() << endl;
+			cout << minIndex << " 번 바리스타" << " 완료시간:" << bari[minIndex].getFinishMakingTime() << endl;
 			cout << endl;
 			workIndex.push(make_pair(minIndex, bari[minIndex].getFinishMakingTime().getTimeSec()));
 			bari[minIndex].doWork();
