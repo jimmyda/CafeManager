@@ -1,6 +1,6 @@
 #pragma once
 
-// 현재 생각하고 있는 로드 밸런싱 알고리즘
+// 로드 밸런싱 알고리즘
 /*
 # Least Connection (최소 접속 방식) 
 + 오픈 커넥션이 가장 적은 서버로 사용자 요구를 연결하는 방식 
@@ -22,25 +22,6 @@ extern queue<order> ord;
 
 priority_queue<pair <int, int> > workIndex;
 
-//#define MAX_ORDER 10 // 바리스타 개인이 받을 수 있는 최대 주문량
-/*
-int searchMakeTime(string drinkName, int begin, int end) {
-	int mid = (begin + end) / 2;
-	if (drinkName == men[mid].getDrinkName()) {
-		cout << "찾은 음료 이름 :" << drinkName << endl;
-		return men[mid].getMakeTime();
-	}
-	else if (begin <= end){
-		if (drinkName[0] == men[mid].getDrinkName()[0])
-			
-		else if (drinkName[0] < men[mid].getDrinkName()[0])
-			searchMakeTime(drinkName, begin, mid);
-		else
-			searchMakeTime(drinkName, mid, end);
-	}
-}
-*/
-
 void selectBarista(order ord) {
 	
 	int numOfDrink = ord.getNumOfDrink();	// 주문 받은 수량
@@ -54,12 +35,10 @@ void selectBarista(order ord) {
 			break;
 		}
 	}
-//	int makeTime = searchMakeTime(drinkName, 0, men.size());
 
 	if (numOfDrink == 1) { // 주문 받은 1개이면
 	// 오름차순으로 정렬되있으므로 숙련도가 높은 barista부터 찾음(뒤부터 search)
 		// 1. 바리스타랭크가 현재 음료를만들수 있는지, 가장 적게 만든사람
-
 		int min = 1000;
 		int minIndex;
 		for (int i = numOfBarista - 1; i >= 0; i--) { // 바리스타 index는 0부터 이므로 numOfBarista-1
@@ -80,23 +59,10 @@ void selectBarista(order ord) {
 		bari[minIndex].incNumOfCofMade();
 		cout << "주문: " << men[menuIndex].getDrinkName() << endl;
 		cout << "요구 Rank: " << men[menuIndex].getRank() << endl;
-		cout << "몇번 바리스타 :" << minIndex << " 완료시간:"<< bari[minIndex].getFinishMakingTime() << endl;
+		cout << minIndex << " 번 바리스타" << " 완료시간:" << bari[minIndex].getFinishMakingTime() << endl;
 		cout << endl;
 		workIndex.push(make_pair(minIndex, bari[minIndex].getFinishMakingTime().getTimeSec()));
 		bari[minIndex].doWork();
-		// 
-
-
-		/*
-		for (int i = numOfBarista - 1; i >= 0; i--) {
-			if (!bari[i].getDoing()) {	// 일을 안하고 있으면
-				bari[i].doWork();	// barista의 flag를 true로 바꿔줌
-				//workIndex.push_back();
-				break;
-			}
-			
-		}
-		*/
 	}
 	else {	// 주문 받은 수량이 여러개이면
 		for (int i = 0; i < numOfDrink; i++) {
@@ -119,17 +85,12 @@ void selectBarista(order ord) {
 			bari[minIndex].incNumOfCofMade();
 			cout << "주문: " << men[menuIndex].getDrinkName() << endl;
 			cout << "요구 Rank: " << men[menuIndex].getRank() << endl;
-			cout << "몇번 바리스타 :" << minIndex << " 완료시간:" << bari[minIndex].getFinishMakingTime() << endl;
+			cout << minIndex << " 번 바리스타" << " 완료시간:" << bari[minIndex].getFinishMakingTime() << endl;
 			cout << endl;
 			workIndex.push(make_pair(minIndex, bari[minIndex].getFinishMakingTime().getTimeSec()));
 			bari[minIndex].doWork();
 		}
 	}
-}
-
-void findEndOrder() {
-	// to do something
-
 }
 
 void start() {
@@ -171,7 +132,6 @@ void start() {
 					// 찾으면 break
 					else
 						break;
-					//barinumber = bariNum;
 				}
 				// 꺼내 두었던 바리스타들 다시 priority_queue에 넣는거
 				while (!tempQ.empty()) {
@@ -181,10 +141,7 @@ void start() {
 
 				bariTime = bariTime + curMakeTime;
 				workIndex.pop();
-				workIndex.push(make_pair(bariNum, bariTime));
-				//cout << workIndex.top().first << endl;
-				//cout << workIndex.top().second << endl;
-				
+				workIndex.push(make_pair(bariNum, bariTime));	
 			}
 			
 			// 로드 밸런싱 알고리즘을 통해 현재 주문번호에 맞는 바리스타를 선택함
@@ -205,11 +162,6 @@ void start() {
 				workIndex.pop();
 			}
 			++curTime;	// 시간을 1분 늘려줌
-			
-
-			// to do something
-			// 어떤 바리스타가 제조중인 음료가 완료될 시간일 경우 바리스타의 플래그를 false로 만들어주고 제조완료 메세지 출력
-			//findEndOrder();
 		}
 	}
 	cout << endl;
@@ -224,4 +176,3 @@ void start() {
 		cout << "]" << endl;
 	}
 }
-//수정

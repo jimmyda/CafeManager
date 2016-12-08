@@ -150,18 +150,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="barista.h" />
-    <ClInclude Include="extendedLoadBalancing.h" />
     <ClInclude Include="loadBalancing.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="myTime.h" />
     <ClInclude Include="order.h" />
-    <ClInclude Include="resultObserver.h" />
-    <ClInclude Include="Result.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="barista.txt" />
+    <Text Include="barista2.txt" />
     <Text Include="help.txt" />
+    <Text Include="menu2.txt" />
     <Text Include="menu.txt" />
+    <Text Include="order2.txt" />
     <Text Include="order.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
