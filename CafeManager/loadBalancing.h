@@ -57,6 +57,7 @@ void selectBarista(order ord) {
 			bari[minIndex].setFinishMakingTime(ord.getOrderTime() + men[menuIndex].getMakeTime());
 		}
 		bari[minIndex].incNumOfCofMade();
+		cout << "주문: " << men[menuIndex].getDrinkName() << endl;
 		cout << "요구 Rank: " << men[menuIndex].getRank() << endl;
 		cout << "몇번 바리스타 :" << minIndex << " 완료시간:"<< bari[minIndex].getFinishMakingTime() << endl;
 		cout << endl;
@@ -82,6 +83,7 @@ void selectBarista(order ord) {
 				bari[minIndex].setFinishMakingTime(ord.getOrderTime() + men[menuIndex].getMakeTime());
 			}
 			bari[minIndex].incNumOfCofMade();
+			cout << "주문: " << men[menuIndex].getDrinkName() << endl;
 			cout << "요구 Rank: " << men[menuIndex].getRank() << endl;
 			cout << "몇번 바리스타 :" << minIndex << " 완료시간:" << bari[minIndex].getFinishMakingTime() << endl;
 			cout << endl;
@@ -164,12 +166,12 @@ void start() {
 	}
 	cout << endl;
 	cout << "<로드밸런싱 결과>" << endl;
-	for (int i = 0; i < barinumber; i++)
+	for (int i = 0; i <= barinumber; i++)
 	{
-		cout << i + 1 << "번 바리스타(Rank " << bari[i+1].getRank() << "): " << "[";
-		for (int j = 0; j < ((double)bari[i + 1].getNumOfCofMade() / totalMake) * 10.0; j++)
+		cout << i << "번 바리스타(Rank " << bari[i].getRank() << ", " << bari[i].getNumOfCofMade() << "개 제작): " << "[";
+		for (int j = 0; j < ((double)bari[i].getNumOfCofMade() / totalMake) * 10.0; j++)
 			cout << "*";
-		for (int k = 10; k >((double)bari[i + 1].getNumOfCofMade() / totalMake) * 10.0; k--)
+		for (int k = 10; k >((double)bari[i].getNumOfCofMade() / totalMake) * 10.0; k--)
 			cout << " ";
 		cout << "]" << endl;
 	}
